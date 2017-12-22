@@ -1,15 +1,15 @@
 #include<stdio.h>
 int main(void)
 {
-    long long int unsorted,hasht[78600]={0},sorted[78600]={0},count[78600]={0},top=-1,i,n,largest=0;
+    long long int unsorted,hasht[78600]={0},sorted[78600]={0},top=-1,i,n,largest=0;
 
     scanf("%lld",&n);     //No of elements to be sorted.
     for(i=0;i<n;i++)
     {
         scanf("%lld",&unsorted);  //Unsorted array input
 
-        if(hasht[unsorted])      //if element entered has already been input earlier, like in array 1 2 3 3 4, 3 is being input twice in that case:
-        count[unsorted]++;
+        if(hasht[unsorted])      //if element entered has already been input earlier, like in array 1 2 3 3 4, 3 is being input twice, in that case:
+        hasht[unsorted]++;
 
         else
         hasht[unsorted]=1;      //First occurence of element in unsorted array.
@@ -22,21 +22,11 @@ int main(void)
         for(i=0;i<largest+1;i++)
             if(hasht[i])            //If the element existed in unsorted array
             {
-                if(count[i])        //In case it existed more than once in that unsorted array
-                {
-                    for(int j=0;j<=count[i];j++)
+                    for(int j=0;j<hasht[i];j++) //In case element exist more than once in that unsorted array
                     {
                         printf("%lld ",i);      //print it upto the times it occured in that unsorted array.
 
                         ++top; sorted[top]=i;   //A array Sorted is being maintained in case we want to use this sorted array instead of just traversing the unsorted array in sorted manner
                     }
-
-                    goto label;
-                }
-
-                printf("%lld ",i);              //Print element it existed only once in the unsorted array
-
-                ++top; sorted[top]=i;           //again this is for sorted array.
-                label: continue;
             }
 }
