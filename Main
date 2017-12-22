@@ -1,5 +1,5 @@
 #include<stdio.h>
-#define SIZE 50000
+#define SIZE 500000
 int main(void)
 {
     long long int unsorted,hasht[SIZE]={0},sorted[SIZE]={0},top=-1,i,n,largest=0,minimum=0;
