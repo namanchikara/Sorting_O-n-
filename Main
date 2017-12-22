@@ -1,8 +1,8 @@
 #include<stdio.h>
-#define SIZE 500000
+#define SIZE 50000
 int main(void)
 {
-    long long int unsorted,hasht[SIZE]={0},sorted[SIZE]={0},top=-1,i,n,largest=0;
+    long long int unsorted,hasht[SIZE]={0},sorted[SIZE]={0},top=-1,i,n,largest=0,minimum=0;
 
     scanf("%lld",&n);     //No of elements to be sorted.
     for(i=0;i<n;i++)
@@ -17,10 +17,13 @@ int main(void)
 
         if(unsorted>largest)
         largest=unsorted;        //this determines the maximum size of a element in unsorted array.
+
+        if(unsorted<minimum)
+        minimum=unsorted;
     }
         printf("Sorted elements are: ");
 
-        for(i=0;i<largest+1;i++)
+        for(i=minimum;i<largest+1;i++)
             if(hasht[i])            //If the element existed in unsorted array
             {
                     for(int j=0;j<hasht[i];j++) //In case element exist more than once in that unsorted array
