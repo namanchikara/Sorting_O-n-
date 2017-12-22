@@ -1,0 +1,42 @@
+#include<stdio.h>
+int main(void)
+{
+    long long int unsorted[20000]={0},hasht[20000]={0},sorted[20000]={0},count[20000]={0},top=-1,i,n,largest=0;
+
+    scanf("%lld",&n);     //No of elements to be sorted.
+    for(i=0;i<n;i++)
+    {
+        scanf("%lld",&unsorted[i]);  //Unsorted array input
+
+        if(hasht[unsorted[i]])      //if element entered has already been input earlier, like in array 1 2 3 3 4, 3 is being input twice in that case:
+        count[unsorted[i]]++;
+
+        else
+        hasht[unsorted[i]]=1;      //First occurence of element in unsorted array.
+
+        if(unsorted[i]>largest)
+        largest=unsorted[i];        //this determines the maximum size of a element in unsorted array.
+    }
+        printf("Sorted elements are: ");    
+
+        for(i=0;i<largest+1;i++)
+            if(hasht[i])            //If the element existed in unsorted array
+            {
+                if(count[i])        //In case it existed more than once in that unsorted array
+                {
+                    for(int j=0;j<=count[i];j++)
+                    {
+                        printf("%lld ",i);      //print it upto the times it occured in that unsorted array.
+
+                        ++top; sorted[top]=i;   //A array Sorted is being maintained in case we want to use this sorted array instead of just traversing the unsorted array in sorted manner
+                    }
+
+                    goto label;                 
+                }
+
+                printf("%lld ",i);              //Print element it existed only once in the unsorted array
+
+                ++top; sorted[top]=i;           //again this is for sorted array.
+                label: continue;
+            }
+}
